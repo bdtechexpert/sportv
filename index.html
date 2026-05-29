@@ -259,14 +259,6 @@ btn.on('click', function(e) {
     
    
    
-   
-   
-   
-   
-   
-   
-   
-   
      
 <style>
 #fredflix-modal-overlay {
@@ -303,7 +295,7 @@ btn.on('click', function(e) {
     font-size: 15px;
     line-height: 1.6;
     margin-bottom: 20px;
-    color: #ccc;
+    color: #000000;
 }
 
 #fredflix-modal iframe {
@@ -336,13 +328,13 @@ btn.on('click', function(e) {
     top: 10px;
     right: 14px;
     font-size: 20px;
-    color: #bbb;
+    color: #000000;
     cursor: pointer;
     display: none; 
     transition: color 0.3s;
 }
 #fredflix-close-btn:hover {
-    color: #fff;
+    color: red;
 }
 
 /* Countdown text */
@@ -355,8 +347,6 @@ btn.on('click', function(e) {
     font-weight: bold;
 }
 </style>
-
-
 
 <script>
 const adLink = "https://landslidegraphsystems.com/cb9qybx5q?key=6507258c1d9590f2b577229ef7249b58";
@@ -376,8 +366,8 @@ function getNextDelay() {
 
     let delay = Math.floor(Math.random() * (MAX_GAP - MIN_GAP + 1)) + MIN_GAP;
 
-    // small jitter (0–20 sec)
-    let jitter = Math.floor(Math.random() * 20000);
+    // small jitter (0–30 sec)
+    let jitter = Math.floor(Math.random() * 30000);
 
     delay = Math.random() > 0.5 ? delay + jitter : delay - jitter;
 
@@ -387,6 +377,10 @@ function getNextDelay() {
 
 // ===== SHOW POPUP =====
 function showFredflixModal() {
+
+    // ✅ NEW SAFETY: tab hidden check
+    if (document.hidden) return;
+
     if (popupCount >= maxPopups) return;
 
     const overlay = document.getElementById("fredflix-modal-overlay");
@@ -396,7 +390,7 @@ function showFredflixModal() {
     overlay.style.display = "flex";
     popupCount++;
 
-    // countdown 5-15 sec
+    // countdown 5-15 sec random
     let timeLeft = Math.floor(Math.random() * 11) + 5;
     closeBtn.style.display = "none";
     countdownEl.style.display = "block";
@@ -441,8 +435,8 @@ function scheduleNextPopup() {
 // ===== INIT =====
 document.addEventListener("DOMContentLoaded", function () {
 
-    // First popup 2–5 sec random
-    const firstDelay = getRandomFirstDelay(2000, 5000);
+    // First popup 5–9 sec random
+    const firstDelay = getRandomFirstDelay(5000, 9000);
     setTimeout(showFredflixModal, firstDelay);
 
     document.body.insertAdjacentHTML("beforeend", `
@@ -473,7 +467,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", hideFredflixModalOnly);
 });
 </script>
-   
    
    
    
